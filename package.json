@@ -1,0 +1,21 @@
+{
+  "name": "html2h",
+  "version": "1.0.0",
+  "description": "HTML to snabbdom hyperscript converter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "HTML",
+    "snabbdom",
+    "hyperscript",
+    "virtual",
+    "dom"
+  ],
+  "author": "ismail codar",
+  "license": "MIT",
+  "dependencies": {
+    "htmlparser2": "^3.8.3"
+  }
+}
