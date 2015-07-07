@@ -131,23 +131,8 @@ var handler = new htmlparser.DomHandler(function (error, dom) {
     write(dom.toString());
 });
 
-var convert = function (html) {
+module.exports = function (html) {
     var parser = new htmlparser.Parser(handler);
     parser.write(html);
     parser.done();
 };
-
-var fileName = process.argv[2];
-
-if (!fileName) {
-    throw new Error('HTML file must be first argument');
-}
-
-convert(fs.readFileSync(fileName, "utf8").toString());
-
-if(process.argv.length == 3) {
-    console.log(output);
-} else {
-    fs.writeFileSync(process.argv[3], output, "utf8");
-    console.log(process.argv[3]);
-}

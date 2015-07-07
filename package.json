@@ -19,6 +19,6 @@
     "htmlparser2": "^3.8.3"
   },
   "bin": {
-    "html2h": "./index.js"
+    "html2h": "./commandline.js"
   }
 }
