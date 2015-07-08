@@ -135,4 +135,5 @@ module.exports = function (html) {
     var parser = new htmlparser.Parser(handler);
     parser.write(html);
     parser.done();
+    return output;
 };
