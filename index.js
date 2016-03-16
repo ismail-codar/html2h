@@ -3,10 +3,6 @@ var htmlparser = require("htmlparser2");
 var level = -1;
 
 var output = "";
-var write = function (text) {
-    //process.stdout.write(text);
-    output += text;
-};
 
 var recursiveVisit = function (dom, callback) {
     if (dom instanceof Array) {
@@ -128,7 +124,7 @@ var handler = new htmlparser.DomHandler(function (error, dom) {
             throw "unknown type"
         }
     });
-    write(dom.toString());
+    output = dom.toString();
 });
 
 module.exports = function (html) {
