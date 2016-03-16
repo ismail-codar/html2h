@@ -100,7 +100,7 @@ var tagToStr = function () {
 };
 
 var textToStr = function () {
-    this.data = this.data.replace(/\r/g, "");
+    this.data = this.data.trim().replace(/\r/g, "");
     this.data = this.data.replace(/\n/g, "\\\n");
     return "'" + this.data + "'";
 };
