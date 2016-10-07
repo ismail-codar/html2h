@@ -82,37 +82,41 @@ var tagToStr = function () {
         attr = "";
     }
     var str = "";
+	str += this.ident;
     str += 'h("' + this.name + '", ' + attr;
     if (childs.length) {
         str += "\n";
-        str += this.ident;
-        str += " [";
+		str += this.ident2;
+        str += "[\n";
         str += childs.join("");
+        str += "\n";
+		str += this.ident2;
         str += "]";
     }
-    str += ")";
-    if (isLastChild(this) == false) {
-        str += ",";
-    }
     str += "\n";
-    str += this.ident;
+	str += this.ident;
+	str += ")";
+    if (isLastChild(this) == false) {
+        str += ",\n";
+    }
     return str;
 };
 
 var textToStr = function () {
     this.data = this.data.trim().replace(/\r/g, "");
     this.data = this.data.replace(/\n/g, "\\\n");
-    return "'" + this.data + "'";
+    return this.ident2 + "'" + this.data + "'";
 };
 
 var commentToStr = function () {
-    return "/*" + this.data + "*/\n";
+    return this.ident2 + "/*" + this.data + "*/\n";
 };
 
 var handler = new htmlparser.DomHandler(function (error, dom) {
 
     recursiveVisit(dom, function (obj, i) {
         obj.ident = Array(level*4).join(" ");
+        obj.ident2 = Array((level+1)*4).join(" ");
         obj.index = i;
         if (obj.type == "tag") {
             obj.toString = tagToStr;
