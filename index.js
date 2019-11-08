@@ -35,6 +35,28 @@ var isLastChild = function (item) {
     return isLast;
 };
 
+var styleStrToObj = function (style) {
+    var r = style.split(";")
+                 .map(function (s) {
+                     return s.trim();
+                 })
+                 .filter(function(s) {
+                     return s.length > 0;
+                 })
+                 .map(function (s) {
+                     return s.split(":").map(function (s) { return s.trim(); });
+                 })
+                 .filter(function (s) {
+                     return s.length === 2;
+                 })
+                 .map(function (s) {
+                     return '"' + s[0] + '": "' + s[1] + '"';
+                 })
+                 .join(", ");
+
+    return JSON.parse("{" + r + "}");
+}
+
 var tagToStr = function () {
     var text = this.text;
     var attr = this.attribs;
@@ -65,11 +87,7 @@ var tagToStr = function () {
             })
         }
         if (style) {
-            attr.style = JSON.parse("{" + style.split(";").map(function (s) {
-                    return s.split(":").map(function (ss) {
-                        return '"' + ss + '"';
-                    }).join(":")
-                }).join(",") + "}");
+            attr.style = styleStrToObj(style);
         }
         if (props) {
             attr.props = props;
